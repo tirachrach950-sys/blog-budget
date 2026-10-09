@@ -1,0 +1,6 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    {"source": "/:path(.*)", "has": [{"type": "host", "value": "plainfoliomoney.com"}], "destination": "https://www.plainfoliomoney.com/:path", "permanent": true}
+  ]
+}
