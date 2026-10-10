@@ -45,3 +45,33 @@ footer a,footer button{color:#fff;margin-right:16px;background:none;border:0;fon
 @media(max-width:800px){.hero{grid-template-columns:1fr}.heroimg{max-width:340px;margin:0 auto 14px}.top nav a{margin-left:14px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 .card[hidden]{display:none}
+
+/* ===== 3D depth: layered shadows, tilt, lift ===== */
+:root{--sh1:0 1px 2px rgba(18,59,50,.10),0 8px 16px -6px rgba(18,59,50,.20),0 26px 40px -20px rgba(18,59,50,.32);--sh2:0 2px 4px rgba(18,59,50,.12),0 18px 28px -8px rgba(18,59,50,.28),0 44px 60px -24px rgba(18,59,50,.42)}
+body{overflow-x:clip}
+.top{box-shadow:0 8px 22px -10px rgba(0,0,0,.55);padding-inline:max(5vw,calc((100vw - 1180px)/2 + 5vw))}
+/* hero photo: tilted slab with thick edge, long shadow and a sticky note */
+.hero{perspective:1400px}
+.heroimg{transform-style:preserve-3d;transform:perspective(1400px) rotateY(-9deg) rotateX(3deg) rotate(2deg);animation:float 7s ease-in-out infinite}
+.heroimg:before{inset:16px -18px -18px 18px;border-radius:22px;box-shadow:0 40px 60px -24px rgba(0,0,0,.55)}
+.heroimg img{box-shadow:0 2px 4px rgba(0,0,0,.18),0 24px 40px -16px rgba(0,0,0,.45)}
+.heroimg:after{content:"";position:absolute;left:-26px;bottom:34px;width:92px;height:92px;background:var(--note);border-radius:3px;transform:rotate(-8deg);box-shadow:0 14px 20px -8px rgba(0,0,0,.45)}
+@keyframes float{0%,100%{transform:perspective(1400px) rotateY(-9deg) rotateX(3deg) rotate(2deg) translateY(0)}50%{transform:perspective(1400px) rotateY(-6deg) rotateX(2deg) rotate(1.5deg) translateY(-12px)}}
+/* cards: soft stacked shadows, lift + tilt on hover */
+.card{box-shadow:var(--sh1);border:0;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.card img{transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.card .tag{box-shadow:0 6px 10px -4px rgba(0,0,0,.4);z-index:1}
+@media(hover:hover){.card:hover{transform:perspective(900px) translateY(-10px) rotateX(3deg) rotateY(-3deg);box-shadow:var(--sh2)}.card:hover img{transform:scale(1.06)}}
+/* article pieces */
+.lead{box-shadow:var(--sh2)}
+.prose blockquote{box-shadow:0 14px 22px -10px rgba(0,0,0,.4),0 2px 3px rgba(0,0,0,.12)}
+.news{box-shadow:0 30px 46px -24px rgba(18,59,50,.75),0 2px 4px rgba(0,0,0,.2)}
+/* buttons: pressable 3D */
+.btn,.news button{box-shadow:0 5px 0 #7d4019,0 14px 20px -8px rgba(0,0,0,.4);transition:transform .15s,box-shadow .15s}
+.btn:hover,.news button:hover{transform:translateY(-2px);box-shadow:0 7px 0 #7d4019,0 18px 24px -8px rgba(0,0,0,.4)}
+.btn:active,.news button:active{transform:translateY(4px);box-shadow:0 1px 0 #7d4019,0 4px 8px -4px rgba(0,0,0,.4)}
+.btn.pin{box-shadow:0 5px 0 #7d151d,0 14px 20px -8px rgba(0,0,0,.4)}
+.chip{box-shadow:0 3px 0 rgba(18,59,50,.35);transition:transform .15s,box-shadow .15s}.chip.on{box-shadow:0 3px 0 #061b16}.chip:active{transform:translateY(2px);box-shadow:none}
+#cookie{box-shadow:0 24px 40px -12px rgba(0,0,0,.45)}
+@media(max-width:800px){.heroimg{transform:perspective(1200px) rotateY(-5deg) rotate(2deg);animation:none}.heroimg:after{width:64px;height:64px;left:-10px}}
+@media(prefers-reduced-motion:reduce){.heroimg{animation:none}.card,.card img{transition:none}}
