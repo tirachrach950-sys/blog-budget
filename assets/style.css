@@ -75,3 +75,4 @@ body{overflow-x:clip}
 #cookie{box-shadow:0 24px 40px -12px rgba(0,0,0,.45)}
 @media(max-width:800px){.heroimg{transform:perspective(1200px) rotateY(-5deg) rotate(2deg);animation:none}.heroimg:after{width:64px;height:64px;left:-10px}}
 @media(prefers-reduced-motion:reduce){.heroimg{animation:none}.card,.card img{transition:none}}
+.ad { min-height: 280px; }
